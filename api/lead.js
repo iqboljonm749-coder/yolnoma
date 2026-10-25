@@ -24,16 +24,15 @@ module.exports = async (req, res) => {
   const chat = (process.env.TELEGRAM_CHAT_ID || "").trim();
 
   if (req.method === "GET") {
-    const out = {
-      tokenSet: !!token,
-      tokenHasBotPrefix: /^bot/i.test(token),
-      tokenHasColon: token.indexOf(":") > 0,
-      chatSet: !!chat,
-      chatLooksNumeric: /^-?\d+$/.test(chat),
-          if (req.query && req.query.test === "1" && token && chat) {
+    if (req.query && req.query.test === "1" && token && chat) {
       const t = await tg(token, "sendMessage", { chat_id: chat, text: "Sinov xabari" });
       return res.status(200).json({ sinov: t.ok ? "OK, xabar yuborildi" : "XATO: " + t.description });
     }
+
+    const out = {
+      tokenSet: !!token,
+      chatSet: !!chat,
+      chatLooksNumeric: /^-?\d+$/.test(chat),
     };
     if (token) {
       try {
