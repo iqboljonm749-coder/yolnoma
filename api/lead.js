@@ -30,6 +30,10 @@ module.exports = async (req, res) => {
       tokenHasColon: token.indexOf(":") > 0,
       chatSet: !!chat,
       chatLooksNumeric: /^-?\d+$/.test(chat),
+          if (req.query && req.query.test === "1" && token && chat) {
+      const t = await tg(token, "sendMessage", { chat_id: chat, text: "Sinov xabari" });
+      return res.status(200).json({ sinov: t.ok ? "OK, xabar yuborildi" : "XATO: " + t.description });
+    }
     };
     if (token) {
       try {
