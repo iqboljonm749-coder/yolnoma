@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yo‘lnoma — chet elga sayohat paketlari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f8fa;--surface:#fff;--ink:#12263a;--muted:#5a6b7b;--line:#d5e0e7;--accent:#e9a100;--accent-ink:#2b1d00;--tile:#12263a;--hero:#12263a;--hero-ink:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1823;--surface:#15232f;--ink:#e8f0f5;--muted:#9bb0c0;--line:#27394a;--accent:#f2b51f;--accent-ink:#2b1d00;--hero:#0a121a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1823;--surface:#15232f;--ink:#e8f0f5;--muted:#9bb0c0;--line:#27394a;--accent:#f2b51f;--accent-ink:#2b1d00;--hero:#0a121a;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header.top{background:var(--hero);color:var(--hero-ink)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font:800 22px "Bricolage Grotesque",sans-serif}
+nav a{color:var(--hero-ink);text-decoration:none;margin-left:20px;font-size:15px}
+.hero{padding:48px 0 64px}
+.hero h1{font-size:clamp(34px,6vw,60px);font-weight:800;max-width:15ch}
+.hero p{max-width:46ch;color:#c4d4e0;margin:18px 0 28px}
+.search{display:flex;gap:10px;flex-wrap:wrap;background:var(--surface);padding:12px;border-radius:14px;max-width:640px}
+.search input{flex:1 1 220px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:12px 14px;font:inherit}
+button,.btn{font:600 16px "Source Sans 3",sans-serif;cursor:pointer;border:0;border-radius:9px;padding:12px 20px;background:var(--accent);color:var(--accent-ink)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;color:#c4d4e0;font-size:15px}
+.facts b{display:block;color:#fff;font:800 22px "Bricolage Grotesque",sans-serif}
+section{padding:48px 0}
+section h2{font-size:clamp(26px,4vw,36px);margin-bottom:6px}
+.sub{color:var(--muted);margin:0 0 22px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.chip{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 16px;border-radius:99px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;padding:9px 12px;font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.tile{height:120px;padding:14px 16px;display:flex;align-items:flex-end;color:#fff;font:800 28px "Bricolage Grotesque",sans-serif}
+.body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.body p{margin:0;color:var(--muted);font-size:15px}
+.meta{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.price{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:8px}
+.price b{font:800 22px "Bricolage Grotesque",sans-serif}
+.empty{padding:40px 0;color:var(--muted)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.why h3{font-size:19px;margin-bottom:6px}
+.why p{margin:0;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+dialog{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 32px);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(5,12,20,.6)}
+.dlg{padding:24px}
+.dlg label{display:block;font-weight:600;margin:14px 0 4px;font-size:15px}
+.dlg input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:11px 12px;font:inherit}
+.row{display:flex;gap:10px;margin-top:20px}
+.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.err{color:#c0392b;font-size:14px;min-height:20px;margin:8px 0 0}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <nav><span class="logo">Yo‘lnoma</span><span><a href="#paketlar">Paketlar</a><a href="#afzallik">Nega biz</a></span></nav>
+  <div class="hero">
+    <h1>Chet elga sayohat paketlari bir joyda</h1>
+    <p>Parvoz, mehmonxona va transfer narxga kiritilgan. Yoʻnalishni tanlang, qolganini bizning menejerlar hal qiladi.</p>
+    <form class="search" id="sf" role="search">
+      <input id="q" type="search" placeholder="Davlat yoki shahar, masalan: Dubay" aria-label="Qidiruv">
+      <button type="submit">Paket topish</button>
+    </form>
+    <div class="facts"><div><b>10</b>yoʻnalish</div><div><b>5–10 kun</b>paketlar davomiyligi</div><div><b>Vizasiz</b>variantlar bor</div></div>
+  </div>
+</div></header>
+
+<main>
+<section id="paketlar"><div class="wrap">
+  <h2>Sayohat paketlari</h2>
+  <p class="sub">Narxlar bir kishi uchun, ikki kishilik xonada, parvoz bilan.</p>
+  <div class="bar" id="chips">
+    <button class="chip" data-r="all" aria-pressed="true">Barchasi</button>
+    <button class="chip" data-r="dengiz" aria-pressed="false">Dengiz boʻyi</button>
+    <button class="chip" data-r="osiyo" aria-pressed="false">Osiyo</button>
+    <button class="chip" data-r="yevropa" aria-pressed="false">Yevropa</button>
+    <select id="sort" aria-label="Saralash"><option value="p">Arzonidan</option><option value="d">Qimmatidan</option><option value="n">Kunlar soni</option></select>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>Hech narsa topilmadi. Qidiruvni tozalab, boshqa nom kiriting.</div>
+</div></section>
+
+<section id="afzallik"><div class="wrap">
+  <h2>Nega Yoʻlnoma</h2>
+  <p class="sub">Sayohatni rejalashtirishni osonlashtiramiz.</p>
+  <div class="why">
+    <div><h3>Narx oldindan aniq</h3><p>Paket narxiga parvoz, mehmonxona va transfer kiradi. Yashirin toʻlovlar yoʻq.</p></div>
+    <div><h3>Viza yordami</h3><p>Hujjatlar roʻyxatini beramiz va topshirishda yordam qilamiz.</p></div>
+    <div><h3>Yoʻlda aloqada</h3><p>Sayohat davomida menejer bilan bogʻlanish mumkin.</p></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© 2026 Yoʻlnoma. Narxlar oʻzgarishi mumkin, aniq narxni menejer tasdiqlaydi.</div></footer>
+
+<dialog id="dlg"><div class="dlg">
+  <h3 id="dt">Soʻrov qoldirish</h3>
+  <p class="sub" id="ds"></p>
+  <form id="f" novalidate>
+    <label for="nm">Ismingiz</label><input id="nm" autocomplete="name">
+    <label for="ph">Telefon raqami</label><input id="ph" type="tel" autocomplete="tel" placeholder="+998 90 123 45 67">
+    <label for="pp">Necha kishi</label><input id="pp" type="number" min="1" max="20" value="2">
+    <input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+    <p class="err" id="er" role="alert"></p>
+    <div class="row"><button type="submit" id="sb">Soʻrov yuborish</button><button type="button" class="ghost" id="cl">Bekor qilish</button></div>
+  </form>
+  <div id="ok" hidden><p><b>Soʻrovingiz qabul qilindi.</b> Menejer siz bilan tez orada bogʻlanadi.</p><div class="row"><button type="button" id="ok2">Yopish</button></div></div>
+</div></dialog>
+
+<script>
+var T=[
+{n:"Turkiya",c:"Antaliya",r:"dengiz",d:7,p:520,h:190,t:"Hammasi kiritilgan mehmonxona, dengiz va hammom."},
+{n:"BAA",c:"Dubay",r:"osiyo",d:6,p:690,h:215,t:"Shahar sayri, choʻl safari va xarid markazlari."},
+{n:"Misr",c:"Hurgʻada",r:"dengiz",d:7,p:480,h:35,t:"Qizil dengiz, snorkeling va piramidalar sayri."},
+{n:"Tailand",c:"Phuket",r:"dengiz",d:9,p:890,h:160,t:"Orollar, mahalliy bozorlar va fil qoʻriqxonasi."},
+{n:"Gruziya",c:"Tbilisi",r:"yevropa",d:5,p:410,h:30,t:"Eski shahar, tog‘lar va sharob vodiysi."},
+{n:"Malayziya",c:"Kuala-Lumpur",r:"osiyo",d:8,p:830,h:250,t:"Egizak minoralar va Langkavi orollari."},
+{n:"Italiya",c:"Rim, Florensiya",r:"yevropa",d:8,p:1450,h:270,t:"Tarixiy shaharlar, muzeylar va italyan oshxonasi."},
+{n:"Maldiv",c:"Male",r:"dengiz",d:7,p:1750,h:200,t:"Orol mehmonxonasi, suv ostida suzish."},
+{n:"Yaponiya",c:"Tokio, Kioto",r:"osiyo",d:10,p:2100,h:20,t:"Poytaxt, qadimiy ibodatxonalar va tezyurar poyezd."},
+{n:"Janubiy Koreya",c:"Seul",r:"osiyo",d:7,p:1180,h:330,t:"Saroylar, K-pop mahallalari va koreys taomlari."}
+];
+var reg="all",qs="",grid=document.getElementById("grid"),emp=document.getElementById("empty"),cur=null;
+function render(){
+  var a=T.filter(function(x){return(reg==="all"||x.r===reg)&&(x.n+" "+x.c).toLowerCase().indexOf(qs)>-1});
+  var s=document.getElementById("sort").value;
+  a.sort(function(x,y){return s==="p"?x.p-y.p:s==="d"?y.p-x.p:x.d-y.d});
+  emp.hidden=a.length>0;
+  grid.innerHTML=a.map(function(x){var i=T.indexOf(x);
+    return '<article class="card"><div class="tile" style="background:linear-gradient(135deg,hsl('+x.h+' 55% 32%),hsl('+(x.h+40)+' 60% 20%))">'+x.n+'</div><div class="body"><div class="meta"><span>'+x.c+'</span><span>'+x.d+' kun</span></div><p>'+x.t+'</p><div class="price"><span><small>dan</small> <b>$'+x.p+'</b></span><button data-i="'+i+'">Tanlash</button></div></div></article>'}).join("");
+}
+document.getElementById("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;reg=b.dataset.r;this.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===b)});render()});
+document.getElementById("sort").addEventListener("change",render);
+document.getElementById("q").addEventListener("input",function(){qs=this.value.trim().toLowerCase();render()});
+document.getElementById("sf").addEventListener("submit",function(e){e.preventDefault();document.getElementById("paketlar").scrollIntoView({behavior:"smooth"})});
+var dlg=document.getElementById("dlg"),f=document.getElementById("f"),ok=document.getElementById("ok"),er=document.getElementById("er");
+grid.addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;cur=T[b.dataset.i];
+  document.getElementById("dt").textContent=cur.n+": soʻrov qoldirish";
+  document.getElementById("ds").textContent=cur.d+" kun, $"+cur.p+" dan, bir kishi uchun.";
+  f.hidden=false;ok.hidden=true;er.textContent="";f.reset();document.getElementById("pp").value=2;dlg.showModal()});
+document.getElementById("cl").onclick=function(){dlg.close()};
+document.getElementById("ok2").onclick=function(){dlg.close()};
+f.addEventListener("submit",function(e){e.preventDefault();
+  var nm=document.getElementById("nm").value.trim(),ph=document.getElementById("ph").value.trim(),sb=document.getElementById("sb");
+  if(nm.length<2){er.textContent="Ismingizni kiriting.";return}
+  if(ph.replace(/\D/g,"").length<9){er.textContent="Telefon raqamini toʻliq kiriting.";return}
+  er.textContent="";sb.disabled=true;sb.textContent="Yuborilmoqda...";
+  fetch("/api/lead",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:nm,phone:ph,people:document.getElementById("pp").value,tour:cur.n+" ("+cur.d+" kun, $"+cur.p+" dan)",website:document.getElementById("hp").value})})
+  .then(function(r){if(!r.ok)throw new Error("x");f.hidden=true;ok.hidden=false})
+  .catch(function(){er.textContent="Yuborib boʻlmadi. Birozdan keyin urinib koʻring."})
+  .then(function(){sb.disabled=false;sb.textContent="Soʻrov yuborish"});
+});
+render();
+</script>
+</body>
+</html>
