@@ -8,50 +8,13 @@ function parse(body) {
   return body || {};
 }
 
-async function tg(token, method, payload) {
-  const r = await fetch("https://api.telegram.org/bot" + token + "/" + method, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload || {}),
-  });
-  let j = {};
-  try { j = await r.json(); } catch (e) {}
-  return j;
-}
-
 module.exports = async (req, res) => {
-  const token = (process.env.TELEGRAM_BOT_TOKEN || "").trim();
-  const chat = (process.env.TELEGRAM_CHAT_ID || "").trim();
-
-  if (req.method === "GET") {
-    if (req.query && req.query.test === "1" && token && chat) {
-      const t = await tg(token, "sendMessage", { chat_id: chat, text: "Sinov xabari" });
-      return res.status(200).json({ sinov: t.ok ? "OK, xabar yuborildi" : "XATO: " + t.description });
-    }
-
-    const out = {
-      tokenSet: !!token,
-      chatSet: !!chat,
-      chatLooksNumeric: /^-?\d+$/.test(chat),
-    };
-    if (token) {
-      try {
-        const me = await tg(token, "getMe");
-        out.tokenCheck = me.ok ? "OK, bot: @" + me.result.username : "XATO: " + me.description;
-        if (me.ok && chat) {
-          const c = await tg(token, "getChat", { chat_id: chat });
-          out.chatCheck = c.ok ? "OK, chat turi: " + c.result.type : "XATO: " + c.description;
-        }
-      } catch (e) {
-        out.network = "Telegram'ga ulanib bo'lmadi: " + String(e.message || e);
-      }
-    }
-    return res.status(200).json(out);
-  }
-
   if (req.method !== "POST") {
     return res.status(405).json({ ok: false, error: "method" });
   }
+
+  const token = (process.env.TELEGRAM_BOT_TOKEN || "").trim();
+  const chat = (process.env.TELEGRAM_CHAT_ID || "").trim();
 
   const b = parse(req.body);
   if (b.website) return res.status(200).json({ ok: true });
@@ -80,9 +43,13 @@ module.exports = async (req, res) => {
     "🕒 " + time;
 
   try {
-    const j = await tg(token, "sendMessage", { chat_id: chat, text: text, parse_mode: "HTML" });
-    if (!j.ok) {
-      console.error("Telegram xatosi:", j.description);
+    const r = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chat, text: text, parse_mode: "HTML" }),
+    });
+    if (!r.ok) {
+      console.error("Telegram xatosi:", r.status);
       return res.status(502).json({ ok: false, error: "telegram" });
     }
     return res.status(200).json({ ok: true });
